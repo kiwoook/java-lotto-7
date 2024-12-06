@@ -14,4 +14,12 @@ public class OutputViewer {
         System.out.println(ticketsStatus);
     }
 
+    public void printResult(String result, String profitPercent) {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---");
+        System.out.println(result);
+        System.out.println("총 수익률은 " + profitPercent + "%입니다.");
+    }
+
 }

@@ -31,6 +31,26 @@ public class Lotto {
         }
     }
 
+    public void validExistNumber(LottoNumber lottoNumber) {
+        if (numbers.contains(lottoNumber)) {
+            throw new CustomIllegalArgumentException(ErrorMessage.DUPLICATED_LOTTO_NUMBER);
+        }
+    }
+
+    public int countCorrectNumber(Lotto winnerLotto) {
+        int count = 0;
+        for (LottoNumber compareNumber : winnerLotto.numbers) {
+            if (numbers.contains(compareNumber)) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    public boolean hasBonusNumber(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
 
     public String toStatus() {
         StringJoiner joiner = new StringJoiner(", ", "[", "]");
@@ -42,5 +62,11 @@ public class Lotto {
         return joiner.toString();
     }
 
-    // TODO: 추가 기능 구현
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
+    }
+
 }

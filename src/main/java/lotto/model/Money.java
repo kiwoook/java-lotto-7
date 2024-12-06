@@ -1,6 +1,8 @@
 package lotto.model;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import lotto.exception.CustomIllegalArgumentException;
 
 public class Money {
@@ -34,6 +36,16 @@ public class Money {
 
     public long getLottoTicketCount() {
         return value / 1000;
+    }
+
+    public String getProfitPercent(long totalRewardPrice) {
+        BigDecimal percent = new BigDecimal(100);
+        BigDecimal rewardPrice = new BigDecimal(totalRewardPrice);
+        BigDecimal money = new BigDecimal(value);
+
+        BigDecimal bigDecimal = rewardPrice.multiply(percent).divide(money, 1, RoundingMode.HALF_UP);
+
+        return bigDecimal.toString();
     }
 
 

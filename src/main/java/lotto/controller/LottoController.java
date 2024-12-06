@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.model.LottoTickets;
 import lotto.model.Money;
+import lotto.model.WinnerLotto;
 import lotto.utils.RecoveryUtils;
 import lotto.view.InputViewer;
 import lotto.view.OutputViewer;
@@ -10,7 +11,9 @@ public class LottoController {
 
     private final InputViewer inputViewer;
     private final OutputViewer outputViewer;
+
     private LottoTickets lottoTickets = new LottoTickets();
+    private WinnerLotto winnerLotto = new WinnerLotto();
 
     public LottoController(InputViewer inputViewer, OutputViewer outputViewer) {
         this.inputViewer = inputViewer;
@@ -20,6 +23,8 @@ public class LottoController {
     public void execute() {
         Money money = getMoney();
         createLottoTickets(money);
+        getWinnerLotto();
+        result(money);
     }
 
 
@@ -33,4 +38,17 @@ public class LottoController {
     }
 
 
+    public void getWinnerLotto() {
+        RecoveryUtils.executeWithRetry(inputViewer::promptWinnerLotto, winnerLotto::addLotto);
+        RecoveryUtils.executeWithRetry(inputViewer::promptWinnerLotto, winnerLotto::addBonusNumber);
+    }
+
+    public void result(Money money) {
+        lottoTickets.process(winnerLotto);
+        Long totalRewardPrice = lottoTickets.totalRewardPrice();
+        System.out.println(totalRewardPrice);
+        String profitPercent = money.getProfitPercent(totalRewardPrice);
+        System.out.println(profitPercent);
+        outputViewer.printResult(lottoTickets.toResult(), profitPercent);
+    }
 }
