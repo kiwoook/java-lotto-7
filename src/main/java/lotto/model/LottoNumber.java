@@ -1,5 +1,8 @@
 package lotto.model;
 
+import static lotto.utils.Constants.LOTTO_END_NUMBER;
+import static lotto.utils.Constants.LOTTO_START_NUMBER;
+
 import java.util.Objects;
 import lotto.exception.CustomIllegalArgumentException;
 
@@ -17,7 +20,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static void validLottoNumber(int number) {
-        if (number <= 0 || number > 45) {
+        if (number < LOTTO_START_NUMBER || number > LOTTO_END_NUMBER) {
             throw new CustomIllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER);
         }
     }

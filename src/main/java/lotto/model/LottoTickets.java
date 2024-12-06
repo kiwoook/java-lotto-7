@@ -1,6 +1,9 @@
 package lotto.model;
 
 import static lotto.utils.Constants.ENTER;
+import static lotto.utils.Constants.LOTTO_END_NUMBER;
+import static lotto.utils.Constants.LOTTO_SIZE;
+import static lotto.utils.Constants.LOTTO_START_NUMBER;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
@@ -24,7 +27,6 @@ public class LottoTickets {
 
 
     private void initMap() {
-        // 순서 바꿈 이슈 때문에 이따구로 짬...
         List<Reward> rewardList = new ArrayList<>(Arrays.stream(Reward.values()).toList());
         rewardList.reversed();
 
@@ -38,7 +40,7 @@ public class LottoTickets {
 
     public void create(Money money) {
         for (int i = 0; i < money.getLottoTicketCount(); i++) {
-            items.add(new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6)));
+            items.add(new Lotto(Randoms.pickUniqueNumbersInRange(LOTTO_START_NUMBER, LOTTO_END_NUMBER, LOTTO_SIZE)));
         }
     }
 

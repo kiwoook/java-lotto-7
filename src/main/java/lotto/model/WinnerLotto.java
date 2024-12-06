@@ -45,9 +45,11 @@ public class WinnerLotto {
 
     private int parseNumber(String input) {
         try {
+            StringUtils.validInput(input);
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new CustomIllegalArgumentException(ErrorMessage.INVALID_LOTTO_NUMBER);
         }
     }
+
 }

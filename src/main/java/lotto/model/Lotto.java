@@ -1,5 +1,7 @@
 package lotto.model;
 
+import static lotto.utils.Constants.LOTTO_SIZE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.StringJoiner;
@@ -22,11 +24,11 @@ public class Lotto {
     }
 
     private void validate(List<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new CustomIllegalArgumentException(ErrorMessage.LOTTO_NUMBERS_SIZE);
         }
 
-        if (new HashSet<>(numbers).size() != 6) {
+        if (new HashSet<>(numbers).size() != LOTTO_SIZE) {
             throw new CustomIllegalArgumentException(ErrorMessage.DUPLICATED_LOTTO_NUMBER);
         }
     }
