@@ -12,10 +12,10 @@ public enum Reward {
     NONE(0, false, null, 0);
 
 
-    private int correctCount;
-    private boolean hasBonusNumber;
-    private String message;
-    private long price;
+    private final int correctCount;
+    private final boolean hasBonusNumber;
+    private final String message;
+    private final long price;
 
     Reward(int correctCount, boolean hasBonusNumber, String message, long price) {
         this.correctCount = correctCount;
@@ -24,7 +24,6 @@ public enum Reward {
         this.price = price;
     }
 
-    // 2등일때만 보너스넘버에 대해서 비교하고
     public static Reward getReward(int correctCount, boolean hasBonusNumber) {
         return Arrays.stream(values()).filter(value -> value.filtered(correctCount, hasBonusNumber))
                 .findFirst()
