@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.StringJoiner;
 import lotto.exception.CustomIllegalArgumentException;
 
 public class Lotto {
@@ -11,6 +12,13 @@ public class Lotto {
         List<LottoNumber> lottoNumbers = parseLottoNumbers(numbers);
         validate(lottoNumbers);
         this.numbers = lottoNumbers;
+    }
+
+    private static List<LottoNumber> parseLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .map(LottoNumber::from)
+                .toList();
     }
 
     private void validate(List<LottoNumber> numbers) {
@@ -23,11 +31,15 @@ public class Lotto {
         }
     }
 
-    private List<LottoNumber> parseLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .sorted()
-                .map(LottoNumber::from)
-                .toList();
+
+    public String toStatus() {
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+
+        for (LottoNumber number : numbers) {
+            joiner.add(number.toString());
+        }
+
+        return joiner.toString();
     }
 
     // TODO: 추가 기능 구현

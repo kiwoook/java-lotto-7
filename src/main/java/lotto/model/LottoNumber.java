@@ -22,7 +22,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    // 이거 좀있다 확인해야할거같음
+    @Override
+    public String toString() {
+        return number.toString();
+    }
 
     @Override
     public int compareTo(LottoNumber o) {

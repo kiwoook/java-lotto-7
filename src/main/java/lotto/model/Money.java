@@ -5,10 +5,10 @@ import lotto.exception.CustomIllegalArgumentException;
 
 public class Money {
 
-    private final long money;
+    private final long value;
 
-    public Money(long money) {
-        this.money = money;
+    public Money(long value) {
+        this.value = value;
     }
 
     public static Money from(String input) {
@@ -30,6 +30,10 @@ public class Money {
         if (money % 1000 != 0) {
             throw new CustomIllegalArgumentException(ErrorMessage.INVALID_LOTTO_INPUT);
         }
+    }
+
+    public long getLottoTicketCount() {
+        return value / 1000;
     }
 
 

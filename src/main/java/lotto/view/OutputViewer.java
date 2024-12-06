@@ -8,4 +8,10 @@ public class OutputViewer {
         System.out.println(ERROR_SIGN + e.getMessage());
     }
 
+    public void printLottoTickets(long ticketCount, String ticketsStatus) {
+        System.out.println();
+        System.out.println(ticketCount + "개를 구매했습니다.");
+        System.out.println(ticketsStatus);
+    }
+
 }
