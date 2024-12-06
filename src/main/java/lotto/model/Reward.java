@@ -36,11 +36,7 @@ public enum Reward {
             return this.correctCount == correctCount && this.hasBonusNumber == hasBonusNumber;
         }
 
-        if (hasBonusNumber) {
-            correctCount += 1;
-        }
-
-        return this.correctCount <= correctCount;
+        return this.correctCount == correctCount;
     }
 
     public long getPrice() {

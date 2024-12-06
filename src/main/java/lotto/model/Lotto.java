@@ -40,13 +40,9 @@ public class Lotto {
     }
 
     public int countCorrectNumber(Lotto winnerLotto) {
-        int count = 0;
-        for (LottoNumber compareNumber : winnerLotto.numbers) {
-            if (numbers.contains(compareNumber)) {
-                count += 1;
-            }
-        }
-        return count;
+        return (int) winnerLotto.numbers.stream()
+                .filter(numbers::contains)
+                .count();
     }
 
     public boolean hasBonusNumber(LottoNumber bonusNumber) {
