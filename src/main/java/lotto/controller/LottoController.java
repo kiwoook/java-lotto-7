@@ -12,8 +12,8 @@ public class LottoController {
     private final InputViewer inputViewer;
     private final OutputViewer outputViewer;
 
-    private LottoTickets lottoTickets = new LottoTickets();
-    private WinnerLotto winnerLotto = new WinnerLotto();
+    private final LottoTickets lottoTickets = new LottoTickets();
+    private final WinnerLotto winnerLotto = new WinnerLotto();
 
     public LottoController(InputViewer inputViewer, OutputViewer outputViewer) {
         this.inputViewer = inputViewer;
@@ -40,15 +40,13 @@ public class LottoController {
 
     public void getWinnerLotto() {
         RecoveryUtils.executeWithRetry(inputViewer::promptWinnerLotto, winnerLotto::addLotto);
-        RecoveryUtils.executeWithRetry(inputViewer::promptWinnerLotto, winnerLotto::addBonusNumber);
+        RecoveryUtils.executeWithRetry(inputViewer::promptBonusNumber, winnerLotto::addBonusNumber);
     }
 
     public void result(Money money) {
         lottoTickets.process(winnerLotto);
         Long totalRewardPrice = lottoTickets.totalRewardPrice();
-        System.out.println(totalRewardPrice);
         String profitPercent = money.getProfitPercent(totalRewardPrice);
-        System.out.println(profitPercent);
         outputViewer.printResult(lottoTickets.toResult(), profitPercent);
     }
 }
