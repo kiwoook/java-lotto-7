@@ -37,6 +37,10 @@ public class Money {
             throw new CustomIllegalArgumentException(ErrorMessage.IMPOSSIBLE_PROCESS_INPUT);
         }
 
+        if (money.compareTo(BigInteger.valueOf(TICKET_PRICE)) < 0) {
+            throw new CustomIllegalArgumentException(ErrorMessage.INVALID_MONEY_INPUT);
+        }
+
         if (!money.mod(BigInteger.valueOf(TICKET_PRICE)).equals(BigInteger.ZERO)) {
             throw new CustomIllegalArgumentException(ErrorMessage.INVALID_MONEY_INPUT);
         }
